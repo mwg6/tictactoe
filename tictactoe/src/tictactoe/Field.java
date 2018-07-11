@@ -18,10 +18,11 @@ public class Field {
 	
 	JPanel holdField = new JPanel();
 	
-	JComboBox[] playField;
+	JComboBox[][] playField;
 	
 	int rowAndColumn;
 	
+	JButton done = new JButton("Next Turn");
 	
 	public Field(int size){
 		
@@ -29,51 +30,41 @@ public class Field {
 		
 		//this area sets up a size*size grid of boxes for the play field held in a JPanel
 		holdField.setLayout(new GridLayout(size,size));
-		playField = new JComboBox[size*size];
-		for(int i =0;i<size*size;i++){
+		playField = new JComboBox[size][size];
+		//outer loop will cycle through [i][], inner through [][u]
+		for(int i =0;i<size;i++){
 			
+			for(int u=0;u<size;u++){
+				
 			JComboBox<String> optionsList = new JComboBox<>(options);
-			playField[i] = optionsList;
-			holdField.add(playField[i]);
+			playField[i][u] = optionsList;
+			holdField.add(playField[i][u]);
+			}
 		}
 		area.add(holdField);
 		// end area
 		
 		//This area 
-		JButton done = new JButton("Next Turn");
-		done.addActionListener(new ActionListener(){
-			
-			public void actionPerformed(ActionEvent e){
-				//in here add code to check columns, rows, diagnols, before indicating whose turn it is
-				System.out.println("I <3 u");
-			}
-		});
-		area.add(done, BorderLayout.SOUTH);
+		
+		
+		
 	}
+	
 	
 	public JPanel getArea(){
 		
 		return area;
 	}
 	
-	public int countX(){
-		int countOfX=0;
-		String hold;
-		
-		for(JComboBox item:playField){
-			hold = (String) item.getSelectedItem();
-			if(hold.equals("X")){
-				countOfX++;
-			}
-		}
-		return countOfX;
+	public JComboBox[][] getField(){
+		return playField;
 	}
 	
 	public boolean checkRows(){
 		
 		boolean win = false;
 		
-		String[] checkArray= new String[rowAndColumn];
+		String[] rowHolder = new String[rowAndColumn];
 		//cycle through increments of rowAndcolumn size, checking the contents of each row
 		//the loop below will select row to look at and then analyze whether there is a win
 		for(int rowNum = 0; rowNum<rowAndColumn;rowNum++){
@@ -81,7 +72,7 @@ public class Field {
 		//the loop below will go through the actual row indicated and add indicated row to checkArray
 		for(int i =0;i<rowAndColumn;i++){
 			
-			checkArray[i] = (String) playField[i+(rowNum*rowAndColumn-1)].getSelectedItem();
+			rowHolder[i] = String.valueOf(playField[rowNum][i].getSelectedItem());
 		}
 		
 		//the for loop below will check the checkArray for a win condition
