@@ -27,7 +27,8 @@ public class TicBoard {
 		
 		doneBut.addDoneActionListener(new ActionListener(){
 	    	  public void actionPerformed(ActionEvent e){
-	    		doneBut.checkRows(playZone.getField());
+	    		 doneBut.checkRows(playZone.getField());
+	    		 doneBut.checkColumns(playZone.getField());
 	    	  }
 	      });
 		buttons.add(doneBut);
