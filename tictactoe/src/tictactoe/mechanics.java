@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class mechanics extends JPanel{
@@ -19,7 +20,7 @@ public class mechanics extends JPanel{
 	     
 	   }
 	public void checkRows(JComboBox[][] playField){
-		boolean win = true;
+	
 		int r = playField.length;
 		int c = playField[0].length;
 		int count = 0;
@@ -32,32 +33,31 @@ public class mechanics extends JPanel{
 				if(playField[i][o].getSelectedItem() != ""){
 					//will allow loop to keep performing if everything equals first index
 					if(playField[i][o].getSelectedItem().equals(playField[i][0].getSelectedItem())){
-						System.out.println(playField[i][o].getSelectedItem() + " compared to row reference " + playField[i][0].getSelectedItem());
+						
 						count++;
 					}
 					else{
-						win = false;
+						
 						count=0;
 					}
 				}
 				else{
-					win=false;
+					
 					count=0;
 				}
 			}
 			//handles cases where win is in middle/last row
 			if(count == r){
-				win = true;
-				System.out.println(win);
+				JOptionPane.showMessageDialog(null, playField[i][0].getSelectedItem() + " wins with a row!");
 				break;
 			}
-			else
-			System.out.println(win);
+			
+		
 		}
-		System.out.println("END OF TEST");
+		
 	}
 	public void checkColumns(JComboBox[][] playField){
-		boolean win = true;
+		
 		int r = playField.length;
 		int c = playField[0].length;
 		int count = 0;
@@ -70,32 +70,32 @@ public class mechanics extends JPanel{
 				if(playField[i][o].getSelectedItem() != ""){
 					//will allow loop to keep performing if everything equals first index
 					if(playField[i][o].getSelectedItem().equals(playField[0][o].getSelectedItem())){
-						System.out.println(playField[i][o].getSelectedItem() + " compared to column reference " + playField[0][o].getSelectedItem());
+						
 						count++;
 					}
 					else{
-						win = false;
+						
 						count=0;
 					}
 				}
 				else{
-					win=false;
+				
 					count=0;
 				}
 			}
 			//handles cases where win is in middle/last column
 			if(count == r){
-				win = true;
-				System.out.println(win);
+				
+				JOptionPane.showMessageDialog(null, playField[0][o].getSelectedItem() + " wins with a column!");
 				break;
 			}
-			else
-			System.out.println(win);
+	
+		
 		}
-		System.out.println("END OF TEST");
+
 	}
 	public void checkDiagonals(JComboBox[][] playField){
-		boolean win = true;
+	
 		int r = playField.length;
 		int c = playField[0].length;
 		int count =0;
@@ -105,11 +105,10 @@ public class mechanics extends JPanel{
 				//checks (0,0),(1,1),(2,2) diagonal on traditional Tictac toe board
 				if(playField[o][o].getSelectedItem().equals(playField[0][0].getSelectedItem())){
 					
-					System.out.println(playField[o][o].getSelectedItem() + " compared to diagonal reference " + playField[0][0].getSelectedItem());
 					count++;
 				}
 				else{
-					System.out.println("isn't diagonal");
+					
 					o=c;
 										
 					}
@@ -122,12 +121,10 @@ public class mechanics extends JPanel{
 			if(playField[r-(1+o)][o].getSelectedItem() != ""){
 			if (playField[r-(1+o)][o].getSelectedItem().equals(playField[r-1][0].getSelectedItem())){
 				
-				System.out.println(playField[r-(1+o)][o].getSelectedItem() + " compared to reverse diagonal reference " + playField[r-1][0].getSelectedItem());
 				revCount++;
 			}
 			else{
 				
-				System.out.println("isn't diagonal");
 				break;	
 				
 				}
@@ -135,12 +132,13 @@ public class mechanics extends JPanel{
 		}
 		}
 		if(count == r){
+			JOptionPane.showMessageDialog(null, playField[0][0].getSelectedItem() + " has a forward diagonal");
 			
-			System.out.println("Forward Diagonal Win");
 		}
 		else if (revCount == r){
 			
-			System.out.println("Reverse Diagonal Win");
+			JOptionPane.showMessageDialog(null, playField[r-1][0].getSelectedItem() + " has a reverse diagonal");
+			
 		}
 	
 	}

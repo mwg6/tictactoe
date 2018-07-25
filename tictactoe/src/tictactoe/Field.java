@@ -60,26 +60,5 @@ public class Field {
 		return playField;
 	}
 	
-	public boolean checkRows(){
-		
-		boolean win = false;
-		
-		String[] rowHolder = new String[rowAndColumn];
-		//cycle through increments of rowAndcolumn size, checking the contents of each row
-		//the loop below will select row to look at and then analyze whether there is a win
-		for(int rowNum = 0; rowNum<rowAndColumn;rowNum++){
-		
-		//the loop below will go through the actual row indicated and add indicated row to checkArray
-		for(int i =0;i<rowAndColumn;i++){
-			
-			rowHolder[i] = String.valueOf(playField[rowNum][i].getSelectedItem());
-		}
-		
-		//the for loop below will check the checkArray for a win condition
-		for(int i = 0; i<rowAndColumn;i++){
-			
-		}
-		}
-		return win;
-	}
+	
 }

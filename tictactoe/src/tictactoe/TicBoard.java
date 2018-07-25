@@ -6,10 +6,13 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 public class TicBoard {
 
+	static JTextField turn = new JTextField("X");
+	
 	public static void main(String[] args) {
 		
 		JFrame game = new JFrame("TicTacToe");
@@ -17,6 +20,8 @@ public class TicBoard {
 		JPanel gameBoard = new JPanel();
 		
 		JPanel buttons = new JPanel();
+		
+	
 		
 		game.setSize(400, 400);
 		game.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -27,13 +32,15 @@ public class TicBoard {
 		
 		doneBut.addDoneActionListener(new ActionListener(){
 	    	  public void actionPerformed(ActionEvent e){
-	    		 //doneBut.checkRows(playZone.getField());
-	    		 //doneBut.checkColumns(playZone.getField());
+	    		 doneBut.checkRows(playZone.getField());
+	    		 doneBut.checkColumns(playZone.getField());
 	    		 doneBut.checkDiagonals(playZone.getField());
+	    		 changeTurn();
 	    	  }
 	      });
 		buttons.add(doneBut);
-		
+		turn.setEditable(false);
+		buttons.add(turn);
 		
 		gameBoard.add(playZone.getArea());
 		
@@ -43,5 +50,15 @@ public class TicBoard {
 		
 		
 	}
-
+	
+	public static void changeTurn(){
+		
+		if(turn.getText().equals("X")){
+			
+			turn.setText("O");
+		}
+		else{
+			turn.setText("X");
+		}
+	}
 }
